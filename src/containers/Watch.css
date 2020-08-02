@@ -1,0 +1,39 @@
+
+.watch__containner{
+    padding: 20px 80px;
+    width: 635px;
+}
+
+.video__embeded {
+
+}
+
+.video__detail__box{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 13px;
+    margin-bottom: 20px;
+}
+.video__detail__view{
+    color: #909090;
+    font-size: 15px;
+}
+.video__detail__like__box{
+    display: flex;
+    align-items: center;
+    color: #909090;
+}
+
+.video__detail__like__Item > span  {
+    margin-right: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #909090;
+}
+.video__detail__like__Item > i {
+    color: #909090;
+}
+
+.video__detail__box{
+    border-bottom: 0.2px solid rgb(230, 230, 230)
+}

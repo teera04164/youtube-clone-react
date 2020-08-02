@@ -1,0 +1,45 @@
+.left__menu {
+    z-index: 0;
+    height: 100%;
+    /* background-color: rgb(253, 19, 19); */
+    width: 80px;
+    position: fixed;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    text-align: center;
+    /* padding-top: 20px; */
+}
+
+.left__menuSub {
+    color: inherit;
+    /* blue colors for links too */
+    text-decoration: inherit;
+    /* no underline */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70px;
+    /* background-color: #F9F9F9; */
+    cursor: pointer;
+}
+
+.left__menuSub__active {
+    color: inherit;
+    text-decoration: inherit;
+
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70px;
+    background-color: #F9F9F9;
+    cursor: pointer;
+    text-align: center;
+    color: red;
+}
+
+.left__menu__title {
+    font-size: 10px;
+    font-weight: bold;
+}
