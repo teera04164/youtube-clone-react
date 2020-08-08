@@ -3,12 +3,14 @@ import './RecommendVideo.css'
 import { Link } from 'react-router-dom'
 function RecommendVideo() {
     return (
-        <div className='RecommendVideo'>
-            <h1>Recommended</h1>
-            <div className='containner_video'>
-                {
-                    mockUpVideo.map((ele) => <RowVideo props={ele}/>)
-                }
+        <div className="main__menu">
+            <div className='RecommendVideo'>
+                <h1>Recommended</h1>
+                <div className='containner_video'>
+                    {
+                        mockUpVideo.map((ele,index) => <RowVideo props={ele} key={index} />)
+                    }
+                </div>
             </div>
         </div>
     )
@@ -16,7 +18,7 @@ function RecommendVideo() {
 
 export default RecommendVideo
 
-const RowVideo = ({props: {id, imgVideo, imgChanel, view, time, title, chanel}}) => {
+const RowVideo = ({ props: { id, imgVideo, imgChanel, view, time, title, chanel } }) => {
     return (
         <Link to={`/watch?v=${id}`} className='box__video'>
             <div className='video'>

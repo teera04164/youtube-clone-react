@@ -1,42 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Home from './containers/Home'
-import LeftMenu from './components/LeftMenu';
-import Navbar from './components/Navbar';
+import Home from './containers/Home/Home'
+import LeftMenu from './components/LeftMenu/LeftMenu';
+import Navbar from './components/Navbar/Navbar';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
-import Trending from './containers/Trending';
-import RecommendVideo from './components/RecommendVideo';
-import Watch from './containers/Watch';
+import Trending from './containers/Trending/Trending';
+import Watch from './containers/Watch/Watch';
+import Search from './containers/Search/Search';
+import Subscriptions from './containers/Subscriptions/Subscriptions';
+import { StateProvider } from './hooks/store'
 function App() {
   return (
     <div className="App">
-      <Router basename="/">
-        <Navbar />
-        <Switch>
-          <Route exact path="/">
-            <LeftMenu />
-            <div className="main__menu">
-              <RecommendVideo />
-            </div>
-          </Route>
-          <Route exact path="/feed/trending">
-            <LeftMenu />
-          </Route>
-          <Route exact path="/feed/subscriptions">
-            <LeftMenu />
-            <h1>subscriptions </h1>
-          </Route>
-          <Route exact path="/watch">
-            <Watch />
-          </Route>
-        </Switch>
-      </Router>
+      <StateProvider>
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route  path="/feed/trending" component={Trending} />
+            <Route  path="/feed/subscriptions" component={Subscriptions} />
+            <Route  path="/watch" component={Watch} />
+            <Route  path="/results" component={Search} />
+          </Switch>
+        </Router>
+      </StateProvider>
     </div>
   );
 }

@@ -20,8 +20,9 @@ const fakeData = [
 ]
 
 
-function LeftMenu() {
-    let [isActive, setIsActive] = useState(0)
+function LeftMenu({ select }) {
+    console.log("LeftMenu -> select", select)
+    let [isActive, setIsActive] = useState(select != undefined ? select : null)
 
     const handleClickMenu = (key) => {
         setIsActive(key)
@@ -36,6 +37,7 @@ function LeftMenu() {
                         icon={icon}
                         title={title}
                         index={index}
+                        key={index}
                         handleClickMenu={handleClickMenu}
                         isActive={isActive}
                         link={link}

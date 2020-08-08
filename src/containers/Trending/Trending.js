@@ -1,9 +1,10 @@
 import React from 'react'
+import LeftMenu from '../../components/LeftMenu/LeftMenu';
 
 function Trending() {
     return (
         <div>
-            Trending
+            <LeftMenu select={1}/>
         </div>
     )
 }
