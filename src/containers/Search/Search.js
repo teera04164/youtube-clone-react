@@ -1,31 +1,40 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
+import React, { useState, useEffect, useContext, useMemo } from 'react'
+import { useHistory } from 'react-router-dom'
 import './Search.css'
 import LeftMenu from '../../components/LeftMenu/LeftMenu';
 import { store } from '../../hooks/store'
-import axios from 'axios'
+import { getVideoBySearch } from '../../API'
 
 function Search({ select }) {
-    const useQuery = () => new URLSearchParams(useLocation().search)
-    let [dataVideo, setDataVideo] = useState([])
     const globalState = useContext(store)
-    const [, updateState] = React.useState();
     let history = useHistory()
-    const forceUpdate = React.useCallback(() => updateState({}), []);
+    const { dispatch, state } = globalState;
+
     useEffect(() => {
         initialSearch()
-    }, [globalState.state])
+    }, [])
 
     const initialSearch = async () => {
-        setDataVideo(globalState.state || [])
-        console.log('dataVideo', dataVideo);
-        // forceUpdate()
-        console.log("initialSearch -> globalState.state.data", globalState)
+        let currQuery = new URLSearchParams(window.location.search).get("search_query")
+        let id = currQuery ? currQuery : null
+        if (id)
+            callApi(id)
     }
 
     const onClickVideo = async (id) => {
         history.push(`/watch?v=${id}`)
     }
+
+    const callApi = async (query) => {
+        console.log("in callApi");
+        let data = await getVideoBySearch(query)
+        let fomat = data.items.map((ele) => {
+            let { id: { videoId }, snippet: { title, description, thumbnails: { medium: { url } }, channelTitle } } = ele
+            return { title, description, url, channelTitle, videoId }
+        })
+        dispatch({ type: 'ADD_DATA', playload: fomat })
+    }
+
 
     return (
         <div>
@@ -37,7 +46,7 @@ function Search({ select }) {
                 <div className='line' />
                 <div className='video_search'>
                     {
-                        dataVideo.length > 0 && dataVideo.map(({ title, description, url, channelTitle, videoId },index) =>
+                        state.search.length > 0 && state.search.map(({ title, description, url, channelTitle, videoId }, index) =>
                             <RenderVideo
                                 title={title}
                                 description={description}
@@ -57,9 +66,9 @@ function Search({ select }) {
 export default Search
 
 
-const RenderVideo = ({ title, description, link, channelTitle,videoId, onClickVideo }) => {
+const RenderVideo = ({ title, description, link, channelTitle, videoId, onClickVideo }) => {
     return (
-        <div className='video_box' onClick={()=> onClickVideo(videoId)} >
+        <div className='video_box' onClick={() => onClickVideo(videoId)} >
             <img src={link} />
             <div className='video_box_detail'>
                 <div className='video_box_title'>

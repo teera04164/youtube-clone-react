@@ -1,29 +1,58 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import './Watch.css'
-import { getVideoInfoById } from '../../API'
+import { getVideoInfoById, getVideoRelateById } from '../../API'
 import { videoById } from '../../components/mock'
+import RelateVideo from '../../components/RelateVideo/RelateVideo'
 import moment from 'moment'
+import VideoList from '../../components/VideoList/VideoList';
 function Watch() {
     let [id, setId] = useState(null)
     let [videoInfo, setSideoInfo] = useState(null)
+    let [videoRelate, setVideoRelate] = useState(null)
 
     const getVideoDetail = async () => {
         let vid = new URLSearchParams(window.location.search).get("v")
-        let videoInfo = await getVideoInfoById({ id: vid })
+        let videoInfo = await getVideoInfoById(vid)
+        let _videoRelate = await getVideoRelateById(vid)
+        console.log("getVideoDetail -> _videoRelate", _videoRelate)
+        setVideoRelate(_videoRelate.items)
         setSideoInfo(videoInfo.items)
         setId(vid)
+        console.log("getVideoDetail -> videoRelate", videoRelate)
     }
 
-    useMemo(async () => {
-        await getVideoDetail()
+    useEffect(() => {
+        getVideoDetail()
     }, [])
 
     return (
         <div className="watch__containner">
             {
-                id && <>
-                    <VideoEmbed id={id} />
-                    <VideoDetail id={id} data={videoInfo} />
+                id && videoRelate && <>
+                    <div style={{ display: 'flex' }}>
+                        <div>
+                            <VideoEmbed id={id} />
+                            <VideoDetail id={id} data={videoInfo} />
+                        </div>
+                        <div style={{ marginLeft: '20px', width: '100%' }}>
+                            {
+                                videoRelate.map(({ id: { videoId }, snippet: { title, description, link, channelTitle, thumbnails: { medium: { url } } } }, index) =>
+                                    <VideoList
+                                        title={title}
+                                        description={description}
+                                        link={link}
+                                        channelTitle={channelTitle}
+                                        url={url}
+                                        videoId={videoId}
+                                        getVideoDetail={getVideoDetail}
+                                        key={index}
+                                    />)
+                            }
+
+                        </div>
+
+                    </div>
+
                 </>
             }
         </div>
@@ -36,12 +65,12 @@ const VideoEmbed = ({ id }) => {
     console.log("VideoEmbed -> id", id)
     return (
         <div className="video__embeded">
-            <iframe width="640" height="360" src={`https://www.youtube.com/embed/${id}?rel=0;&autoplay=1`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            <iframe width="722" height="406" src={`https://www.youtube.com/embed/${id}?rel=0;&autoplay=1`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         </div>
     )
 }
 const VideoDetail = ({ id, data }) => {
-    
+
     const { statistics: { viewCount, likeCount, dislikeCount, commentCount } } = data[0]
     const { title, publishedAt } = data[0].snippet
     let dataFomat = moment(publishedAt).format("MMM, D y");

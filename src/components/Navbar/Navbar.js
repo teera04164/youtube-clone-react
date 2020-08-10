@@ -21,7 +21,7 @@ function Navbar() {
 
     const callApi = async () => {
         console.log('in call api');       
-        let data =  await getVideoBySearch({q: query})
+        let data =  await getVideoBySearch(query)
         console.log("callApi -> data", data)
         // let data = search.items
         let fomat = data.items.map((ele) => {
@@ -32,13 +32,15 @@ function Navbar() {
         const { dispatch } = globalState;
         dispatch({ type: 'ADD_DATA', playload: fomat })
         console.log("callApi -> globalState", globalState)
-
-
     }
 
     const initParam = () => {
         let currQuery = new URLSearchParams(window.location.search).get("search_query")
         currQuery ? setQuery(currQuery) : setQuery('')
+    }
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') handleClick()
     }
 
     return (
@@ -50,7 +52,7 @@ function Navbar() {
                 </Link>
             </div>
             <div className="navbar__center">
-                <input value={query} type='text' onChange={({ target: { value } }) => setQuery(value)} />
+                <input value={query} type='text' onChange={({ target: { value } }) => setQuery(value)} onKeyPress={handleKeyPress} />
                 <button to='/results' className="navbar__search" onClick={() => handleClick()}>
                     <i className="fa fa-search" />
                 </button>

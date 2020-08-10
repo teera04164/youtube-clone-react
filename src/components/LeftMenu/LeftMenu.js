@@ -21,7 +21,6 @@ const fakeData = [
 
 
 function LeftMenu({ select }) {
-    console.log("LeftMenu -> select", select)
     let [isActive, setIsActive] = useState(select != undefined ? select : null)
 
     const handleClickMenu = (key) => {
