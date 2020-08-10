@@ -4,7 +4,7 @@ const YT_API_V3_URL = 'https://www.googleapis.com/youtube/v3'
 // const YT_API_V3_URL = 'http://localhost:3002/youtube/v3'
 
 const fakeApi = false
-const API_KEY = ""
+// const API_KEY = ""
 
 const customAxios = axios.create({
     baseURL: YT_API_V3_URL,

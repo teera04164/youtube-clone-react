@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import Home from './containers/Home/Home'
-import LeftMenu from './components/LeftMenu/LeftMenu';
 import Navbar from './components/Navbar/Navbar';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Trending from './containers/Trending/Trending';
 import Watch from './containers/Watch/Watch';

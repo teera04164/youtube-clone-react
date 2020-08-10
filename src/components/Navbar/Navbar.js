@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import './style.css'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { store } from '../../hooks/store'
 import { getVideoBySearch } from '../../API'
-import { search } from '../mock'
+// import { search } from '../mock'
 function Navbar() {
     let [query, setQuery] = useState('')
     let history = useHistory()
@@ -48,7 +48,7 @@ function Navbar() {
             <div className="navbar__left">
                 <i className="fa fa-align-justify" style={{ fontSize: '24px', marginRight: '10px' }} />
                 <Link to='/'>
-                    <img src='/img/logo.png' style={{ height: '50px' }} />
+                    <img src='/img/logo.png' style={{ height: '50px' }} alt="lo go" />
                 </Link>
             </div>
             <div className="navbar__center">

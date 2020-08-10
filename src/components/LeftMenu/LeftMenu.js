@@ -21,7 +21,7 @@ const fakeData = [
 
 
 function LeftMenu({ select }) {
-    let [isActive, setIsActive] = useState(select != undefined ? select : null)
+    let [isActive, setIsActive] = useState(select !== undefined ? select : null)
 
     const handleClickMenu = (key) => {
         setIsActive(key)
@@ -48,7 +48,7 @@ function LeftMenu({ select }) {
 
 const SubMenu = ({ icon, title, index, handleClickMenu, isActive, link }) => {
     return (
-        <Link to={link} className={`${isActive == index ? 'left__menuSub__active' : 'left__menuSub'}`} onClick={() => handleClickMenu(index)}>
+        <Link to={link} className={`${isActive === index ? 'left__menuSub__active' : 'left__menuSub'}`} onClick={() => handleClickMenu(index)}>
             <i class={`${icon}`} />
             <div className='left__menu__title'>
                 {title}

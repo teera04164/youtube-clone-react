@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Watch.css'
 import { getVideoInfoById, getVideoRelateById } from '../../API'
-import { videoById } from '../../components/mock'
+// import { videoById } from '../../components/mock'
 // import RelateVideo from '../../components/RelateVideo/RelateVideo'
 import moment from 'moment'
 import VideoList from '../../components/VideoList/VideoList';

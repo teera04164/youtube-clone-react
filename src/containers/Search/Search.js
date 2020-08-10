@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import './Search.css'
 import LeftMenu from '../../components/LeftMenu/LeftMenu';
@@ -69,7 +69,7 @@ export default Search
 const RenderVideo = ({ title, description, link, channelTitle, videoId, onClickVideo }) => {
     return (
         <div className='video_box' onClick={() => onClickVideo(videoId)} >
-            <img src={link} />
+            <img src={link} alt={title}/>
             <div className='video_box_detail'>
                 <div className='video_box_title'>
                     {title}

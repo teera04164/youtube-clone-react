@@ -22,10 +22,10 @@ const RowVideo = ({ props: { id, imgVideo, imgChanel, view, time, title, chanel 
     return (
         <Link to={`/watch?v=${id}`} className='box__video'>
             <div className='video'>
-                <img src={imgVideo} />
+                <img src={imgVideo} alt={title}/>
             </div>
             <div className='video__detail'>
-                <img src={`${imgChanel}`} />
+                <img src={`${imgChanel}`}  alt={chanel}/>
                 <div className='video__text'>
                     <div className='video__title'>
                         {title}
