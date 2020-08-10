@@ -8,7 +8,7 @@ const VideoList = ({ title, description, link, channelTitle, videoId, url, getVi
     }
     return (
         <div className='video_box' style={{marginTop: '0', marginBottom: '10px'}} onClick={() => onClickVideo(videoId)}>
-            <img src={url} style={{height: '156px'}}/>
+            <img src={url} style={{height: '156px'}} alt={title}/>
             <div className='video_box_detail'>
                 <div className='video_box_title'>
                     {title}
